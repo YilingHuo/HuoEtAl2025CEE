@@ -230,14 +230,10 @@ def Load(X_var_list,stryr,endyr,m1,m2,latmin=20,Center=True,Scale=False):
         mslp=prmsl.prmsl[(stryr1-filstryr)*12:(filendyr-filstryr+1)*12].sel(lat=slice(latmin,90))#20CRv3
         mslp1=prmsl.prmsl[(adjstryr-filstryr)*12:(filendyr-filstryr+1)*12].sel(lat=slice(latmin,90)).mean(dim='time').to_numpy()
         prmsl1 = xr.open_mfdataset('/pscratch/sd/h/huoyilin/e5.sfc.msl.19402024.181x360.nc',preprocess=define_coords,);filstryr=1940            
-        # prmsl1.msl.coords['lat'] = prmsl1['lat'];prmsl1.msl.coords['lon'] = prmsl1['lon']
         mslpera5=prmsl1.msl.swap_dims({"latitude": "lat"}).sel(lat=slice(latmin,90));prmsl1.close()
         mslp1-=mslpera5[(adjstryr-filstryr)*12:(filendyr-filstryr+1)*12].mean(dim='valid_time').to_numpy()
         mslp=np.concatenate((mslp, mslpera5[(filendyr+1-filstryr)*12:(endyr-filstryr+1)*12]+mslp1), axis=0)
-    # prmsl = xr.open_dataset('/pscratch/sd/h/huoyilin/slp.mon.mean.nc');filstryr=1948 #NCEP-NCAR Reanalysis
-    # prmsl=prmsl.reindex(lat=prmsl.lat[::-1]) #NCEP-NCAR Reanalysis
-    # mslp=prmsl.slp[(stryr1-filstryr)*12:(endyr-filstryr+1)*12].sel(lat=slice(latmin,90)) #NCEP-NCAR Reanalysis
-    X_dim_1 = int(np.sum(prmsl.lat>=latmin))
+        X_dim_1 = int(np.sum(prmsl.lat>=latmin))
     X_dim_2 = len(prmsl.lon)
     ## Get Weights for adjusting area by latitude
     weights = np.cos(np.deg2rad(prmsl.lat[prmsl.lat>=latmin]))
