@@ -177,10 +177,10 @@ if Detrend:
 indexyr=np.arange(1,nyear+1)/10
 t_trend=statslinregressts_slopeinterval(indexyr,t_areaavg,clev)
 folder='/global/homes/h/huoyilin/benb0228-PLS-Dynamical-Adjustment-a1db5bc/'
-SLP_contribution=np.loadtxt(folder+'HadCRUT5NSIDC.lat70.'+str(stryr)+str(endyr)+season+'_ipredictand1SLP_contribution.dat')
+SLP_contribution=np.loadtxt(folder+'HadCRUT5NSIDC.lat70.'+str(stryr)+str(endyr)+season+'_ipredictand1SLP_contribution'+season+'.dat')
 sic_dynadj=sic_areaavg-smOLSconfidencelev(SLP_contribution,sic_areaavg,clev)[0]*SLP_contribution
 t_reconst=np.zeros([nfactor+1,len(t_areaavg)])+np.nan
-SLP_contribution=np.loadtxt(folder+'HadCRUT5NSIDC.lat70.'+str(stryr)+str(endyr)+season+'_ipredictand0SLP_contribution.dat')
+SLP_contribution=np.loadtxt(folder+'HadCRUT5NSIDC.lat70.'+str(stryr)+str(endyr)+season+'_ipredictand0SLP_contribution'+season+'.dat')
 t_reconst[1]=statslinregressts_slopeinterval(SLP_contribution,t_areaavg,clev)[0]*SLP_contribution
 residual=t_areaavg-t_reconst[1]
 res_sic=statslinregressts_slopeinterval(sic_dynadj,residual,clev)[0]
