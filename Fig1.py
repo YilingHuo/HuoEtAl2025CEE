@@ -210,7 +210,6 @@ df = pd.read_csv('/global/cfs/cdirs/m1199/huoyilin/cscratch/monthly.ao.index.b50
                    names=['year','Jan','Feb','Mar','Apr','May','Jun',
                           'Jul','Aug','Sep','Oct','Nov','Dec'])
 ao_avg=(((df.Jan[(df.year>=stryr) & (df.year<=endyr)]).to_numpy()+(df.Feb[(df.year>=stryr) & (df.year<=endyr)]).to_numpy()+(df.Dec[(df.year>=stryr1) & (df.year<=endyr-1)])).to_numpy())/3;del df
-switched=False
 t2m_areaavg/=np.nanstd(t2m_areaavg);sic_areaavg/=np.nanstd(sic_areaavg);tcwvf_areaavg/=np.nanstd(tcwvf_areaavg);aht_areaavg/=np.nanstd(aht_areaavg)#ar_areaavg/=np.nanstd(ar_areaavg);
 fntsz=15;linew=3
 indexyr=np.arange(stryr,endyr+1)
